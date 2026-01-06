@@ -8,7 +8,7 @@ import numpy as np
 
 st.set_page_config(
     page_title="Semantic Journey Analyzer",
-    page_layout="wide",
+    layout="wide",
     initial_sidebar_state="expanded"
 )
 
