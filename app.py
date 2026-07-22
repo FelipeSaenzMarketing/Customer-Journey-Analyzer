@@ -6,6 +6,8 @@ import io
 from typing import Dict, List, Tuple
 import numpy as np
 
+from branding import apply_branding, brand_header, project_panel, metric_guide, signature
+
 st.set_page_config(
     page_title="Semantic Journey Analyzer",
     layout="wide",
@@ -183,9 +185,35 @@ def convert_df_to_excel(df: pd.DataFrame) -> bytes:
     return output.getvalue()
 
 def main():
-    st.title("Semantic Journey Analyzer")
-    st.markdown("Classify content into customer journey phases using semantic embeddings")
-    
+    apply_branding()
+    brand_header(
+        "Semantic Journey Analyzer",
+        "Map every page you own to the customer journey stage it actually serves.",
+    )
+    project_panel(
+        "This tool reads the text of your URLs and, using semantic embeddings, classifies each "
+        "one into a customer journey stage: Awareness, Consideration, Purchase or Loyalty. "
+        "It reveals where your content library is concentrated and where the gaps are, so you "
+        "can plan content that covers the full funnel instead of over-serving a single stage.",
+        points=[
+            "Upload a CSV/Excel with URL and Text columns, or paste text directly.",
+            "Each item gets a stage and a confidence score.",
+            "Charts show the distribution and confidence across your content.",
+        ],
+    )
+
+    metric_guide(
+        "How to read these metrics",
+        {
+            "Journey Stage": "The funnel phase the content best matches, based on meaning rather than exact keywords.",
+            "Confidence Score": "Similarity (0-1) between the text and the assigned stage. Higher means a clearer match; low scores flag ambiguous or thin content.",
+            "Awareness": "Educational, top-of-funnel content: guides, definitions, 'what is' explanations.",
+            "Consideration": "Comparisons, reviews and alternatives, where the reader is evaluating options.",
+            "Purchase": "Pricing, quotes, demos and buying-intent pages near the bottom of the funnel.",
+            "Loyalty": "Post-sale content: support, documentation, help center and product manuals.",
+        },
+    )
+
     try:
         model = load_model()
         
@@ -351,6 +379,8 @@ def main():
     except Exception as e:
         st.error(f"Application error: {str(e)}")
         st.info("Please refresh the page and try again")
+
+    signature()
 
 if __name__ == "__main__":
     main()

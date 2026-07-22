@@ -2,7 +2,7 @@
 
 A Streamlit application that classifies content into customer journey stages using semantic embeddings and NLP.
 
-## 🚀 Live Demo
+## Live Demo
 
 **[Try the app on Streamlit Cloud](https://your-app-name.streamlit.app)**
 
